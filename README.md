@@ -93,7 +93,6 @@ DB::table('tasklists')->orderBy('due_date', 'asc')->paginate(5);
 
 ![image_alt](https://github.com/jevinkalathiya/laravel-to-do-list/blob/ad881cbdef1a1789718f112afcbe245b3ce81b7b/public/img/To-Do-List.png)
 
-```
 
 ---
 
