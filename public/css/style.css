@@ -1,0 +1,226 @@
+* {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      padding: 40px 20px;
+    }
+
+    .list-container {
+      max-width: 600px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    input[type="submit"] {
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      opacity: 0.9;
+    }
+
+    #task-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    #task-list li {
+      background: #fefefe;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border-left: 6px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    #task-list li.pending {
+      background: #fefefe;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border-left: 6px solid #ffc107;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    #task-list li.in-progress {
+      background: #fefefe;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border-left: 6px solid #17a2b8;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    }
+    
+    #task-list li.completed {
+      background: #fefefe;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border-left: 6px solid #28a745;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .task-title {
+      font-size: 17px;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .task-title.completed {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .due-date {
+      font-size: 14px;
+      background: #fff3cd;
+      color: #856404;
+      padding: 6px 10px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .status {
+      font-size: 13px;
+      margin-top: 6px;
+      padding: 4px 8px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .pending { background: #ffe08a; color: #5c4400; }
+    .in-progress { background: #91d4f3; color: #034f6d; }
+    .completed-status { background: #c7f5b4; color: #2f6b00; }
+
+    .actions {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .actions a{
+      text-decoration: none;
+    }
+
+    .pending-btn {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+      background-color: #ffc107;
+    }
+
+    .in-progress-btn {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+      background-color: #17a2b8;
+    }
+
+    .completed-btn {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+      background-color: #28a745;
+    }
+
+    .delete-btn {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+      background-color: #dc3545;
+    }
+
+    .actions a:hover {
+      opacity: 0.8;
+    }
+
+    span a {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .task-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .due-date {
+        align-self: flex-start;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .actions a {
+        width: 100%;
+        justify-content: center;
+      }
+    }

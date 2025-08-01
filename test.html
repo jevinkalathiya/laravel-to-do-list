@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modern To-Do List</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    button {
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #fefefe;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border-left: 6px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .task-title {
+      font-size: 17px;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .task-title.completed {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .due-date {
+      font-size: 14px;
+      background: #fff3cd;
+      color: #856404;
+      padding: 6px 10px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .status {
+      font-size: 13px;
+      margin-top: 6px;
+      padding: 4px 8px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .pending { background: #ffe08a; color: #5c4400; }
+    .in-progress { background: #91d4f3; color: #034f6d; }
+    .completed-status { background: #c7f5b4; color: #2f6b00; }
+
+    .actions {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .actions button {
+      background: #f0f0f0;
+      color: #333;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .actions button:hover {
+      background: #dcdcdc;
+    }
+
+    .actions .delete {
+      background: #f8d7da;
+      color: #842029;
+    }
+
+    .actions .delete:hover {
+      background: #f5c2c7;
+    }
+
+    @media (max-width: 600px) {
+      .task-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .due-date {
+        align-self: flex-start;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .actions button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>📝 Modern To-Do List</h2>
+
+    <form id="task-form">
+      <input type="text" id="task-input" placeholder="Enter task" required>
+      <input type="date" id="due-date" required>
+      <button type="submit">Add Task</button>
+    </form>
+
+    <ul id="task-list"></ul>
+  </div>
+
+  <script>
+    const form = document.getElementById('task-form');
+    const taskInput = document.getElementById('task-input');
+    const dueInput = document.getElementById('due-date');
+    const list = document.getElementById('task-list');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const task = taskInput.value.trim();
+      const due = dueInput.value;
+      if (task !== '' && due !== '') {
+        addTask(task, due);
+        taskInput.value = '';
+        dueInput.value = '';
+      }
+    });
+
+    function addTask(task, due) {
+      const li = document.createElement('li');
+
+      li.innerHTML = `
+        <div class="task-header">
+          <span class="task-title">${task}</span>
+          <span class="due-date">🕒 ${due}</span>
+        </div>
+        <span class="status pending">Pending</span>
+        <div class="actions">
+          <button onclick="changeStatus(this, 'pending')">🕗 Pending</button>
+          <button onclick="changeStatus(this, 'in-progress')">⚙️ In Progress</button>
+          <button onclick="changeStatus(this, 'completed')">✅ Completed</button>
+          <button class="delete" onclick="deleteTask(this)">🗑️ Delete</button>
+        </div>
+      `;
+      list.appendChild(li);
+    }
+
+    function changeStatus(button, status) {
+      const li = button.closest('li');
+      const statusLabel = li.querySelector('.status');
+      const taskTitle = li.querySelector('.task-title');
+
+      statusLabel.className = 'status'; // reset all classes
+
+      if (status === 'pending') {
+        statusLabel.classList.add('pending');
+        statusLabel.textContent = 'Pending';
+        taskTitle.classList.remove('completed');
+      } else if (status === 'in-progress') {
+        statusLabel.classList.add('in-progress');
+        statusLabel.textContent = 'In Progress';
+        taskTitle.classList.remove('completed');
+      } else if (status === 'completed') {
+        statusLabel.classList.add('completed-status');
+        statusLabel.textContent = 'Completed';
+        taskTitle.classList.add('completed');
+      }
+    }
+
+    function deleteTask(button) {
+      const li = button.closest('li');
+      li.remove();
+    }
+  </script>
+
+</body>
+</html>
