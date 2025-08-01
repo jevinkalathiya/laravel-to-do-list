@@ -10,7 +10,7 @@ class taskController extends Controller
     public function showTasks(){
         $tasks = DB::table('tasklists')
                     ->orderBy('due_date', 'asc')
-                    ->paginate(5); // Work get is also done by paginate
+                    ->paginate(3); // Work get is also done by paginate
         return view('index', ['tasks' => $tasks]);
     }
 
