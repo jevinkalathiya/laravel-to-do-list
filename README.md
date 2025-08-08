@@ -22,7 +22,7 @@ A responsive and user-friendly **To-Do List application** built with Laravel. Ea
 
 ## 📂 Tech Stack
 
-- **Backend**: Laravel 10+
+- **Backend**: Laravel 12
 - **Frontend**: Blade templating, Font Awesome
 - **Database**: MySQL
 - **Styling**: Custom CSS + Bootstrap (for pagination)
